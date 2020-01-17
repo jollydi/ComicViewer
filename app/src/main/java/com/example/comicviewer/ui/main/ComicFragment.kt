@@ -8,19 +8,26 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.comicviewer.ComicWrapper
 import com.example.comicviewer.R
+
+private const val ARG_WRAPPER = "wrapper"
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class PlaceholderFragment : Fragment() {
+class ComicFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
+    private var wrapper: ComicWrapper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
+        }
+        arguments?.let {
+            wrapper = it.getParcelable(ARG_WRAPPER)
         }
     }
 
@@ -33,6 +40,7 @@ class PlaceholderFragment : Fragment() {
         pageViewModel.text.observe(this, Observer<String> {
             textView.text = it
         })
+        root.setBackgroundResource(wrapper!!.color)
         return root
     }
 
@@ -48,10 +56,11 @@ class PlaceholderFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionNumber: Int, wrapper: ComicWrapper): ComicFragment {
+            return ComicFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
+                    putParcelable(ARG_WRAPPER, wrapper)
                 }
             }
         }
