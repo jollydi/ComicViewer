@@ -16,7 +16,7 @@ private val TAB_TITLES = arrayOf(
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
+class ComicsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     val wrappers = arrayListOf<ComicWrapper>(ComicWrapper(), ComicWrapper(), ComicWrapper(), ComicWrapper(), ComicWrapper())
@@ -34,5 +34,10 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     override fun getCount(): Int {
         // Show 2 total pages.
         return wrappers.size
+    }
+
+    fun add () {
+        wrappers.add(ComicWrapper())
+        notifyDataSetChanged()
     }
 }

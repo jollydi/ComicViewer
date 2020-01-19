@@ -16,7 +16,7 @@ private const val ARG_WRAPPER = "wrapper"
 /**
  * A placeholder fragment containing a simple view.
  */
-class ComicFragment : Fragment() {
+class ComicFragment : Fragment(),  {
 
     private lateinit var pageViewModel: PageViewModel
     private var wrapper: ComicWrapper? = null
