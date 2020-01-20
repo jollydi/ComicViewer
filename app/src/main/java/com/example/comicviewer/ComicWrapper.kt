@@ -6,6 +6,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class ComicWrapper(var color: Int = 0, var xkcdIssue: Int = 614) : Parcelable {
 
+    var comic: Comic? = null
+
     init {
         color =
             if (iterator.hasNext()) {
@@ -19,7 +21,7 @@ class ComicWrapper(var color: Int = 0, var xkcdIssue: Int = 614) : Parcelable {
     }
 
     companion object {
-        private val COLORS = listOf<Int>(
+        private val COLORS = listOf(
             android.R.color.holo_green_light,
             android.R.color.holo_blue_light,
             android.R.color.holo_orange_light,
